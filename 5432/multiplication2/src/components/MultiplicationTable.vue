@@ -5,6 +5,8 @@ import {ref} from "vue";
 const name = ref('Mari')
 const numOfRows = ref(10)
 const numOfCols = ref(10)
+const rowToHighlight = ref(1)
+const colToHighlight = ref(1)
 </script>
 
 
@@ -33,9 +35,9 @@ const numOfCols = ref(10)
     </div>
 
     <table>
-      <tr v-for="row in numOfRows">
+      <tr v-for="row in numOfRows" :class="{ highlight : row === rowToHighlight }">
 
-        <td v-for="col in numOfCols">
+        <td v-for="col in numOfCols" :class="{ highlight : col === 5 }">
           {{ row * col}}
         </td>
 
@@ -52,8 +54,17 @@ table {
   border: 4px solid black;
 
   tr {
+    &.highlight {
+      background-color: lightskyblue;
+      color: white;
+    }
     td {
       border: 1px dotted red;
+
+      &.highlight {
+        background-color: lightskyblue;
+        color: white;
+      }
     }
   }
 }
