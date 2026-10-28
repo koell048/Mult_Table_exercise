@@ -1,12 +1,15 @@
 <script setup>
 
 import {ref} from "vue";
+import InputField from "./InputField.vue";
+import LovelyFrame from "./LovelyFrame.vue";
 
 const name = ref('Mari')
 const numOfRows = ref(10)
 const numOfCols = ref(10)
 const rowToHighlight = ref(1)
-const colToHighlight = ref(1)
+const colToHighlight = ref(10)
+const showTheMath = ref(false)
 </script>
 
 
@@ -18,31 +21,28 @@ const colToHighlight = ref(1)
 
     <div class="inputs">
 
-      <label>
-        Name: <input type="text" v-model="name"/>
-      </label>
+      <input-field label-text="What's your name?" v-model="name"/>
 
-      <label>
-        How many rows do you want?
-        <input type="number" v-model.number="numOfRows"/>
-      </label>
-
-      <label>
-        How many columns do you want?
-        <input type="number" v-model.number="numOfCols"/>
-      </label>
+      <input-field label-text="How many rows do you want?" input-type="number" v-model="numOfRows"/>
+      <input-field label-text="How many columns do you want?" input-type="number" v-model="numOfCols"/>
+      <input-field label-text="Which row to highlight?" input-type="number" v-model="rowToHighlight"/>
+      <input-field label-text="Which column to highlight?" input-type="number" v-model="colToHighlight"/>
+      <input-field label-text="Show the math?" input-type="checkbox" v-model="showTheMath"/>
 
     </div>
+
+    <lovely-frame>
 
     <table>
       <tr v-for="row in numOfRows" :class="{ highlight : row === rowToHighlight }">
 
         <td v-for="col in numOfCols" :class="{ highlight : col === 5 }">
-          {{ row * col}}
+          {{ row * col }}
         </td>
 
       </tr>
     </table>
+    </lovely-frame>
   </section>
 
 
@@ -58,6 +58,7 @@ table {
       background-color: lightskyblue;
       color: white;
     }
+
     td {
       border: 1px dotted red;
 
